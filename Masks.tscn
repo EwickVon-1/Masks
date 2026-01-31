@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=4 uid="uid://c2vsuk8eqga4"]
+[gd_scene load_steps=7 format=4 uid="uid://bmrenjpi7rfl1"]
 
-[ext_resource type="Texture2D" uid="uid://run5wmjqjyvq" path="res://kenney_sports-pack/Tilesheet/groundGrass_mown.png" id="1_qhvhl"]
-[ext_resource type="Script" uid="uid://ymegxikgq1ak" path="res://character_body_2d.gd" id="2_dkync"]
-[ext_resource type="Texture2D" uid="uid://doghhxvkmo8qg" path="res://Sprites_01/PNG/Players/Player Blue/playerBlue_roll.png" id="2_qhvhl"]
+[ext_resource type="Texture2D" path="res://kenney_sports-pack/Tilesheet/groundGrass_mown.png" id="1_qhvhl"]
+[ext_resource type="Script" path="res://character_body_2d.gd" id="2_dkync"]
+[ext_resource type="Texture2D" path="res://Sprites_01/PNG/Players/Player Blue/playerBlue_roll.png" id="2_qhvhl"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dkync"]
 texture = ExtResource("1_qhvhl")
