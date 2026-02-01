@@ -62,7 +62,7 @@ func try_move(dir: Vector2i) -> bool:
 		
 func move_to(target_pos: Vector2):
 	var tween = create_tween()
-	tween.tween_property(self, "position", target_pos, move_time)\
+	tween.tween_property(self, "global_position", target_pos, move_time)\
 		.set_trans(Tween.TRANS_SINE)\
 		.set_ease(Tween.EASE_OUT)
 	tween.finished.connect(end_turn)
@@ -70,3 +70,6 @@ func move_to(target_pos: Vector2):
 func end_turn() -> void:
 	is_enemy_turn = false
 	call_deferred("emit_signal", "turn_finished")
+
+func die() -> void:
+	queue_free()

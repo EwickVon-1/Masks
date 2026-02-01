@@ -6,12 +6,15 @@ var enemy_scene := preload("res://Nodes/Enemy.tscn")
 var enemies = []
 signal turn_finished
 
+func die():
+	enemies = []
+		
 func spawn_enemy(grid_pos: Vector2i) -> void:
 	var enemy_instance = enemy_scene.instantiate()
 	add_child(enemy_instance)
 	
 	enemy_instance.CurrPos = grid_pos
-	enemy_instance.position = gridManager.grid_to_world(grid_pos)
+	enemy_instance.global_position = gridManager.grid_to_world(grid_pos)
 	
 	gridManager.place_agent(enemy_instance, grid_pos)
 	enemies.append(enemy_instance)

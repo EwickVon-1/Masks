@@ -12,32 +12,21 @@ func load_level(index : int) -> bool:
 	if not level_data:
 		return false
 	
-	# Load all moveable tiles (define occupancy)
-	for cell in level_data["empty"]:
-		gridManager.agent_occupancy[cell] = null
-		gridManager.static_occupancy[cell] = {
-									"wall": false,
-									"door": false,
-									"spike": false,
-									"key": false }
+	# Initalize all cells in GridManager
+	gridManager.initialize_cells(level_data["empty"])
 
 	
 	# Load the Player
 	playerController.CurrPos = level_data["player"]
-	playerController.position = gridManager.grid_to_world(level_data["player"])
+	playerController.global_position = gridManager.grid_to_world(level_data["player"])
 	gridManager.place_agent(playerController, level_data["player"]) 
-	gridManager.static_occupancy[level_data["player"]] = {"wall": false,
-										"door": false,
-										"spike": false,
-										"key": false }
 	
 	# Load the Enemies
 	for enemy in level_data["enemy"]:
 		enemyController.spawn_enemy(enemy)
-		gridManager.static_occupancy[enemy] = {"wall": false,
-											"door": false,
-											"spike": false,
-											"key": false }
+		
+		print("TileMap global pos:", gridManager.tilemap.global_position)
+		print("Cell (0,0) world:", gridManager.tilemap.map_to_local(Vector2i.ZERO))
 	
 	# Static Objects
 	for obj in level_data["static"]:
@@ -69,6 +58,12 @@ func turn_cycle() -> void:
 		for enemy in enemyController.enemies:
 			print("Enemy turn ended, CurrPos: ", enemy.CurrPos)
 			print("Actual Position: ", enemy.position)
+			if (enemy.CurrPos == playerController.CurrPos):
+				death(0)
 		
-		#end loop
-	
+
+func death(index: int) -> void:
+	for enemy in enemyController.enemies:
+		enemy.die()
+	enemyController.die()
+	load_level(0)

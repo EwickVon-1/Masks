@@ -37,7 +37,9 @@ func load_map(index : int):
 		"enemy" : [],
 		"static" : []
 	}
-
+	
+	gridManager.tilemap = level_data
+	
 	for cell in level_data.get_used_cells():
 		var tile_id := level_data.get_cell_source_id(cell)
 		
@@ -46,6 +48,7 @@ func load_map(index : int):
 			print("wall at: ", cell)
 		elif tile_id == TileID.PLAYER:
 			level_info["player"] = cell
+			level_info.empty.append(cell)
 			print("player at: ", cell)
 		elif tile_id == TileID.SPIKE:
 			level_info["static"].append({"type": "spike", "pos": cell})
@@ -55,6 +58,7 @@ func load_map(index : int):
 			print("door at: ", cell)
 		elif tile_id == TileID.ENEMY:
 			level_info["enemy"].append(cell)
+			level_info.empty.append(cell)
 			print("enemy at: ", cell)
 		elif tile_id == TileID.KEY:
 			level_info["static"].append({ "type": "key", "pos": cell })
