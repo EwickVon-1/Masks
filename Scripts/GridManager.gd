@@ -1,15 +1,12 @@
 extends Node2D 
-@export var TILE_SIZE := 32 
 
-var occupancy: Dictionary = {}
+@export var TILE_SIZE := 5
 
-@onready var tilemap = $"../TileMapLayer"
+var agent_occupancy: Dictionary = {}
+var static_occupancy: Dictionary = {}
+var level := 0
 
- # Called when the node enters the scene tree for the first time. 
-func _ready() -> void: 
-	for cell: Vector2i in tilemap.get_used_cells():
-		occupancy[cell] = false
-
+	
 # Converts grid position (x, y) to the world position in pixels 
 func grid_to_world(cell: Vector2i) -> Vector2: 
 	return Vector2(cell.x * TILE_SIZE, cell.y * TILE_SIZE) 
@@ -20,26 +17,37 @@ func world_to_grid(pos: Vector2) -> Vector2i:
 		floori(pos.x / TILE_SIZE), 
 		floori(pos.y / TILE_SIZE)) 
 
-# Returns true if the object is within the map bounds 
-func is_inside(object_pos: Vector2i) -> bool: 
-	return occupancy.has(object_pos)
+# Returns true if the agent is within the map bounds 
+func is_inside(agent_pos: Vector2i) -> bool: 
+	return static_occupancy.has(agent_pos)
 
-func get_cell(cell: Vector2i) -> bool: 
-	return occupancy.get(cell) 
+func place_agent(agent : Node, cell: Vector2i): 
+	agent_occupancy[cell] = agent
 
-func place_agent(cell: Vector2i): 
-	occupancy[cell] = true 
+func is_blocked(cell: Vector2i) -> bool:
+	
+	if static_occupancy[cell]["wall"]:
+		return true
+		
+	return false
+	
+func place_static(type, cell: Vector2i) -> void:
+	static_occupancy[cell] = {"wall": false,
+								"door": false,
+								"spike": false,
+								"key": false }
+	static_occupancy[cell][type] = true
 	
 func can_move(target: Vector2i) -> bool:
-	return is_inside(target) and occupancy[target] == false
+	return is_inside(target) and not is_blocked(target)
 
 func empty_cell(cell: Vector2i): 
-	occupancy[cell] = false 
+		agent_occupancy[cell] = null
 
-func move(agent_cell : Vector2i, target: Vector2i) -> bool: 
+func move(agent : Node, initial : Vector2i, target: Vector2i) -> bool: 
 	if not can_move(target): 
 		return false 
 	
-	empty_cell(agent_cell) 
-	place_agent(target) 
+	empty_cell(initial) 
+	place_agent(agent, target) 
 	return true

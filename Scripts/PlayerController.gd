@@ -1,6 +1,5 @@
 extends CharacterBody2D
 
-@export var tile_size := 32
 @export var move_time := 0.04
 @onready var grid_manager = get_node("../GridManager")
 
@@ -11,10 +10,6 @@ signal turn_finished
 
 var action_committed := false
 
-
-func _ready() -> void:
-	grid_manager.place_agent(CurrPos)
-	
 func _process(_delta : float):
 	if not is_player_turn or action_committed:
 		return
@@ -36,12 +31,12 @@ func _process(_delta : float):
 
 func try_move(dir: Vector2i):
 	var target_pos = CurrPos + dir
-	print(target_pos)
 	
-	if 	grid_manager.move(CurrPos, target_pos):
+	if 	grid_manager.move(self, CurrPos, target_pos):
 		move_to(grid_manager.grid_to_world(target_pos))
 		CurrPos = target_pos
 	else:
+		print("Player did not move to: ", target_pos)
 		end_turn()
 
 func move_to(target_pos: Vector2):

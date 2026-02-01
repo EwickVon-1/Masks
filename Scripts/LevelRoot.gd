@@ -1,11 +1,53 @@
 extends Node
 
 @onready var playerController = get_node("Player")
-@onready var enemyController = get_node("Enemy-01")
+@onready var enemyController = get_node("EnemyManager")
+@onready var gridManager = get_node("GridManager")
+@onready var levelManager = get_node("LevelManager")
 
+
+func load_level(index : int) -> bool:
+	var level_data = levelManager.load_map(index)
+	
+	if not level_data:
+		return false
+	
+	# Load all moveable tiles (define occupancy)
+	for cell in level_data["empty"]:
+		gridManager.agent_occupancy[cell] = null
+		gridManager.static_occupancy[cell] = {
+									"wall": false,
+									"door": false,
+									"spike": false,
+									"key": false }
+
+	
+	# Load the Player
+	playerController.CurrPos = level_data["player"]
+	playerController.position = gridManager.grid_to_world(level_data["player"])
+	gridManager.place_agent(playerController, level_data["player"]) 
+	gridManager.static_occupancy[level_data["player"]] = {"wall": false,
+										"door": false,
+										"spike": false,
+										"key": false }
+	
+	# Load the Enemies
+	for enemy in level_data["enemy"]:
+		enemyController.spawn_enemy(enemy)
+		gridManager.static_occupancy[enemy] = {"wall": false,
+											"door": false,
+											"spike": false,
+											"key": false }
+	
+	# Static Objects
+	for obj in level_data["static"]:
+		gridManager.place_static(obj["type"], obj["pos"])
+	return true
+	
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	load_level(0)
 	turn_cycle()
 
 
@@ -21,16 +63,12 @@ func turn_cycle() -> void:
 		
 		playerController.is_player_turn = false
 		
-		enemyController.is_enemy_turn = true
 		#enemy turn
 		enemyController.take_turn()
 		await enemyController.turn_finished
-		print("Enemy turn ended, CurrPos:", enemyController.CurrPos)
+		for enemy in enemyController.enemies:
+			print("Enemy turn ended, CurrPos: ", enemy.CurrPos)
+			print("Actual Position: ", enemy.position)
 		
-		enemyController.is_enemy_turn = false
 		#end loop
-		
-		if playerController.CurrPos == enemyController.CurrPos:
-			print("\n\nYou Died!!\n\n")
-			playerController.CurrPos = Vector2i.ZERO
-			enemyController.CurrPos = [5, 5]
+	

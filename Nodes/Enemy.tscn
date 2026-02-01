@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7yls711q5x3a"]
+
+[ext_resource type="Script" uid="uid://ch8vy508lxrlv" path="res://Scripts/Enemy.gd" id="1_rxcki"]
+[ext_resource type="Texture2D" uid="uid://doghhxvkmo8qg" path="res://Assets/Sprites_01/PNG/Players/Player Blue/playerBlue_roll.png" id="2_rxcki"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_05j8i"]
+
+[node name="Enemy" type="CharacterBody2D"]
+script = ExtResource("1_rxcki")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_rxcki")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_05j8i")

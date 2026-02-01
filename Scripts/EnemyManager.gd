@@ -1,77 +1,26 @@
-extends CharacterBody2D
+extends Node
 
-@export var tile_size := 32
-@export var move_time := 0.04
+@onready var gridManager = get_node("../GridManager")
 
-
-var CurrPos : Vector2i = Vector2i.ZERO
-
-
-@onready var player = get_node("../Player")
-
-var is_enemy_turn := false
-var choices
-
-
-@onready var grid_manager = get_node("../GridManager")
+var enemy_scene := preload("res://Nodes/Enemy.tscn")
+var enemies = []
 signal turn_finished
 
-func _ready() -> void: 
-	CurrPos.x = 3
-	CurrPos.y = 3
-	grid_manager.place_agent(CurrPos)
+func spawn_enemy(grid_pos: Vector2i) -> void:
+	var enemy_instance = enemy_scene.instantiate()
+	add_child(enemy_instance)
 	
+	enemy_instance.CurrPos = grid_pos
+	enemy_instance.position = gridManager.grid_to_world(grid_pos)
+	
+	gridManager.place_agent(enemy_instance, grid_pos)
+	enemies.append(enemy_instance)
+
 func take_turn() -> void:
-	if not is_enemy_turn:
-		return
-
-	# Enemy Logic / Pathfinding
+	for enemy_instance in enemies:
+		enemy_instance.is_enemy_turn = true
+		enemy_instance.take_turn()
+		await enemy_instance.turn_finished
+		enemy_instance.is_enemy_turn = false
 	
-	if player:
-		var delta_pos = player.CurrPos - CurrPos
-		if abs(delta_pos.x) > abs(delta_pos.y):
-			choices = [
-				Vector2i(sign(delta_pos.x), 0),   # move toward player on X
-				Vector2i(0, sign(delta_pos.y)),   # then Y
-				Vector2i(-sign(delta_pos.x), 0),  # backtrack X
-				Vector2i(0, -sign(delta_pos.y)),  # backtrack Y
-				Vector2i.ZERO                     # wait
-			]
-		else:
-			choices = [
-				Vector2i(0, sign(delta_pos.y)),   # move toward player on Y
-				Vector2i(sign(delta_pos.x), 0),   # then X
-				Vector2i(0, -sign(delta_pos.y)),  # backtrack Y
-				Vector2i(-sign(delta_pos.x), 0),  # backtrack X
-				Vector2i.ZERO                     # wait
-			]
-		
-		for dir in choices:
-			if dir == Vector2i.ZERO:
-				end_turn()
-				return
-			
-			if try_move(dir):
-				return
-
-func try_move(dir: Vector2i) -> bool:
-	var target_pos = CurrPos + dir
-	
-	if grid_manager.move(CurrPos, target_pos):
-		move_to(grid_manager.grid_to_world(target_pos))
-		CurrPos = target_pos
-		return true
-	else:
-		return false
-		
-		
-func move_to(target_pos: Vector2):
-	var tween = create_tween()
-	tween.tween_property(self, "position", target_pos, move_time)\
-		.set_trans(Tween.TRANS_SINE)\
-		.set_ease(Tween.EASE_OUT)
-	tween.finished.connect(end_turn)
-
-func end_turn() -> void:
-	is_enemy_turn = false
 	call_deferred("emit_signal", "turn_finished")
