@@ -5,6 +5,13 @@ extends CharacterBody2D
 
 
 var CurrPos : Vector2i = Vector2i.ZERO
+var lastKnown
+enum States {
+	IDLE = 1,
+	WANDER = 2,
+	CHASE = 3,
+	SEARCH = 4,
+}
 
 
 @onready var player = get_node("../../Player")
