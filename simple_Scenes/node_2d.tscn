@@ -1,0 +1,27 @@
+[gd_scene load_steps=5 format=3 uid="uid://bpv8raibrswmv"]
+
+[ext_resource type="Script" uid="uid://cntio2bwx5qmy" path="res://simple_Scenes/Chest.gd" id="1_6ttqt"]
+[ext_resource type="Texture2D" uid="uid://bdu3egg7412mu" path="res://Assets/Sprites_01/PNG/Tiles/Yellow tiles/tileYellow_03.png" id="1_7ymxg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ymxg"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_0e48y"]
+size = Vector2(64, 48)
+
+[node name="Chest" type="StaticBody2D"]
+script = ExtResource("1_6ttqt")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("RectangleShape2D_7ymxg")
+
+[node name="Locked" type="Sprite2D" parent="."]
+texture = ExtResource("1_7ymxg")
+
+[node name="Unlocked" type="Sprite2D" parent="."]
+
+[node name="Area2D" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_0e48y")
+
+[connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]

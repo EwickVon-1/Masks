@@ -5,6 +5,7 @@ extends Node
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
+	$key.key_has_been_taken.connect($Chest.key_has_been_taken)
 	turn_cycle()
 
 

@@ -33,7 +33,6 @@ func _process(_delta : float):
 	if dir != Vector2i.ZERO:
 		try_move(dir)
 
-
 func try_move(dir: Vector2i):
 	var target_pos = CurrPos + dir
 	
