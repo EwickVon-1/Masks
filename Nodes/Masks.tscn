@@ -1,4 +1,4 @@
-[gd_scene format=3 uid="uid://c2vsuk8eqga4"]
+[gd_scene load_steps=8 format=3 uid="uid://c2vsuk8eqga4"]
 
 [ext_resource type="PackedScene" uid="uid://ddeqnyksgfxxk" path="res://Nodes/GridManager.tscn" id="1_c3vev"]
 [ext_resource type="Script" uid="uid://btbhq0gmhlc0l" path="res://Scripts/LevelRoot.gd" id="1_mu5sr"]
@@ -8,58 +8,57 @@
 [ext_resource type="Texture2D" uid="uid://dobuyqg6lvqr5" path="res://Art/grid.png" id="6_0mos2"]
 [ext_resource type="Texture2D" uid="uid://b7tc42rxvnhsc" path="res://Art/shadow.png" id="6_667tg"]
 
-[node name="LevelRoot" type="Node2D" unique_id=1347239427]
+[node name="LevelRoot" type="Node2D"]
 script = ExtResource("1_mu5sr")
 
-[node name="GridManager" parent="." unique_id=250765835 instance=ExtResource("1_c3vev")]
+[node name="GridManager" parent="." instance=ExtResource("1_c3vev")]
 
-[node name="LevelManager" parent="." unique_id=140179288 instance=ExtResource("5_0mos2")]
+[node name="LevelManager" parent="." instance=ExtResource("5_0mos2")]
 position = Vector2(-1, 0)
 scale = Vector2(2, 2)
 
-[node name="EnemyManager" parent="." unique_id=250747482 instance=ExtResource("5_lw7f6")]
+[node name="EnemyManager" parent="." instance=ExtResource("5_lw7f6")]
 position = Vector2(533, -301)
 
-[node name="Player" parent="." unique_id=116534902 instance=ExtResource("3_lw7f6")]
+[node name="Player" parent="." instance=ExtResource("3_lw7f6")]
 
-[node name="Shadow" type="Sprite2D" parent="Player" unique_id=173912253]
-visible = false
+[node name="Shadow" type="Sprite2D" parent="Player"]
 texture_filter = 1
 position = Vector2(880, -880)
 scale = Vector2(160, 160)
 texture = ExtResource("6_667tg")
 
-[node name="Grid4" type="Sprite2D" parent="." unique_id=1218511456]
+[node name="Grid4" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(223, 768)
 scale = Vector2(32, 32)
 texture = ExtResource("6_0mos2")
 
-[node name="Grid5" type="Sprite2D" parent="." unique_id=1811055975]
+[node name="Grid5" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(735, 768)
 scale = Vector2(32, 32)
 texture = ExtResource("6_0mos2")
 
-[node name="Grid6" type="Sprite2D" parent="." unique_id=2041811175]
+[node name="Grid6" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(1247, 768)
 scale = Vector2(32, 32)
 texture = ExtResource("6_0mos2")
 
-[node name="Grid" type="Sprite2D" parent="." unique_id=1747476734]
+[node name="Grid" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(223, 256)
 scale = Vector2(32, 32)
 texture = ExtResource("6_0mos2")
 
-[node name="Grid3" type="Sprite2D" parent="." unique_id=2004230608]
+[node name="Grid3" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(1247, 256)
 scale = Vector2(32, 32)
 texture = ExtResource("6_0mos2")
 
-[node name="Grid2" type="Sprite2D" parent="." unique_id=127082536]
+[node name="Grid2" type="Sprite2D" parent="."]
 texture_filter = 1
 position = Vector2(735, 256)
 scale = Vector2(32, 32)
