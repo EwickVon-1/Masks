@@ -9,6 +9,7 @@ var is_player_turn := false
 signal turn_finished 
 
 var action_committed := false
+var dirfacing = "right"
 
 func _process(_delta : float):
 	if not is_player_turn or action_committed:
@@ -16,9 +17,11 @@ func _process(_delta : float):
 	
 	var dir = Vector2i.ZERO
 	if Input.is_action_just_pressed("ui_right"): 
-		dir = Vector2i.RIGHT 
+		dir = Vector2i.RIGHT
+		dirfacing = "right"
 	elif Input.is_action_just_pressed("ui_left"): 
 		dir = Vector2i.LEFT 
+		dirfacing = "left"
 	elif Input.is_action_just_pressed("ui_down"): 
 		dir = Vector2i.DOWN 
 	elif Input.is_action_just_pressed("ui_up"): 
