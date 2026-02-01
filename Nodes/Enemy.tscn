@@ -1,15 +1,97 @@
-[gd_scene load_steps=4 format=3 uid="uid://c7yls711q5x3a"]
+[gd_scene format=3 uid="uid://c7yls711q5x3a"]
 
 [ext_resource type="Script" uid="uid://ch8vy508lxrlv" path="res://Scripts/Enemy.gd" id="1_rxcki"]
 [ext_resource type="Texture2D" uid="uid://doghhxvkmo8qg" path="res://Assets/Sprites_01/PNG/Players/Player Blue/playerBlue_roll.png" id="2_rxcki"]
+[ext_resource type="Texture2D" uid="uid://jd2g5xhne8qu" path="res://Art/orc1.png" id="3_gdadt"]
+[ext_resource type="Texture2D" uid="uid://bg0em6x8uh48" path="res://Art/orc2.png" id="4_7p786"]
+[ext_resource type="Texture2D" uid="uid://o62gfhoap8yv" path="res://Art/orc3.png" id="5_3g7dj"]
+[ext_resource type="Texture2D" uid="uid://dvl12rhvbl6wv" path="res://Art/orcwalk1.png" id="6_3g7dj"]
+[ext_resource type="Script" uid="uid://bybmhrj5sto2t" path="res://Nodes/animation_enemy.gd" id="6_7p786"]
+[ext_resource type="Texture2D" uid="uid://dy10iqoedcpjt" path="res://Art/orcwalk2.png" id="6_cg2qd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_05j8i"]
 
-[node name="Enemy" type="CharacterBody2D"]
+[sub_resource type="Animation" id="Animation_cg2qd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_rxcki")]
+}
+
+[sub_resource type="Animation" id="Animation_4rwf4"]
+resource_name = "idle"
+length = 3.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [ExtResource("3_gdadt"), ExtResource("4_7p786"), ExtResource("5_3g7dj")]
+}
+
+[sub_resource type="Animation" id="Animation_ai8nb"]
+resource_name = "runleft"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_cg2qd")]
+}
+
+[sub_resource type="Animation" id="Animation_r5dea"]
+resource_name = "runright"
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:texture")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_3g7dj")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_r5dea"]
+_data = {
+&"RESET": SubResource("Animation_cg2qd"),
+&"idle": SubResource("Animation_4rwf4"),
+&"runleft": SubResource("Animation_ai8nb"),
+&"runright": SubResource("Animation_r5dea")
+}
+
+[node name="Enemy" type="CharacterBody2D" unique_id=1177096588]
 script = ExtResource("1_rxcki")
 
-[node name="Sprite2D" type="Sprite2D" parent="."]
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1820836871]
+texture_filter = 1
+position = Vector2(7, -4)
+scale = Vector2(2, 2)
 texture = ExtResource("2_rxcki")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=425769987]
 shape = SubResource("RectangleShape2D_05j8i")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=701838017]
+libraries/ = SubResource("AnimationLibrary_r5dea")
+script = ExtResource("6_7p786")

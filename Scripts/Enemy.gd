@@ -18,6 +18,7 @@ enum States {
 
 var is_enemy_turn := false
 var choices
+var dirfacing = "left"
 
 
 @onready var grid_manager = get_node("../../GridManager")
@@ -58,6 +59,11 @@ func take_turn() -> void:
 
 func try_move(dir: Vector2i) -> bool:
 	var target_pos = CurrPos + dir
+	
+	if CurrPos.x - target_pos.x < 0:
+		dirfacing = "right"
+	elif CurrPos.x - target_pos.x > 0:
+		dirfacing = "left"
 	
 	if grid_manager.move(self, CurrPos, target_pos):
 		move_to(grid_manager.grid_to_world(target_pos))

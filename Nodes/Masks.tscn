@@ -23,6 +23,7 @@ position = Vector2(533, -301)
 [node name="Player" parent="." unique_id=116534902 instance=ExtResource("3_lw7f6")]
 
 [node name="Shadow" type="Sprite2D" parent="Player" unique_id=173912253]
+visible = false
 texture_filter = 1
 position = Vector2(880, -880)
 scale = Vector2(160, 160)
