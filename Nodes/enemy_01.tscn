@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://da4wjqh02ykfc"]
 
-[ext_resource type="Script" uid="uid://bab6ttfempwdc" path="res://node_2d.gd" id="1_hdsgg"]
+[ext_resource type="Script" uid="uid://ch8vy508lxrlv" path="res://EnemyManager.gd" id="1_idf2r"]
 [ext_resource type="Texture2D" uid="uid://gxm8supb7vph" path="res://icon.svg" id="2_t7m7e"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_ayrpq"]
@@ -9,8 +9,8 @@ radius = 13.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_r81cn"]
 radius = 104.0
 
-[node name="Enemy_01" type="CharacterBody2D"]
-script = ExtResource("1_hdsgg")
+[node name="Enemy-01" type="CharacterBody2D"]
+script = ExtResource("1_idf2r")
 
 [node name="AnimatedSprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.25, 0.25)

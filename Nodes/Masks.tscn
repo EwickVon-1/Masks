@@ -1,9 +1,10 @@
-[gd_scene load_steps=7 format=4 uid="uid://c2vsuk8eqga4"]
+[gd_scene load_steps=8 format=4 uid="uid://c2vsuk8eqga4"]
 
 [ext_resource type="PackedScene" uid="uid://ddeqnyksgfxxk" path="res://Nodes/GridManager.tscn" id="1_c3vev"]
 [ext_resource type="Script" uid="uid://btbhq0gmhlc0l" path="res://Scripts/LevelRoot.gd" id="1_mu5sr"]
 [ext_resource type="Texture2D" uid="uid://run5wmjqjyvq" path="res://Assets/kenney_sports-pack/Tilesheet/groundGrass_mown.png" id="2_mu5sr"]
 [ext_resource type="PackedScene" uid="uid://baemephc655cr" path="res://Nodes/Player.tscn" id="3_lw7f6"]
+[ext_resource type="PackedScene" uid="uid://da4wjqh02ykfc" path="res://Nodes/enemy_01.tscn" id="5_lw7f6"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dkync"]
 texture = ExtResource("2_mu5sr")
@@ -856,3 +857,6 @@ tile_map_data = PackedByteArray("AAD6//L/AAAFABoAAAD6//P/AAAFABoAAAD6//T/AAAFABo
 tile_set = SubResource("TileSet_sahq2")
 
 [node name="Player" parent="." instance=ExtResource("3_lw7f6")]
+
+[node name="Enemy-01" parent="." instance=ExtResource("5_lw7f6")]
+position = Vector2(533, -301)
