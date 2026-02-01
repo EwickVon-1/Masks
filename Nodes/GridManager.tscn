@@ -1,6 +1,0 @@
-[gd_scene load_steps=2 format=3 uid="uid://ddeqnyksgfxxk"]
-
-[ext_resource type="Script" uid="uid://dihn5733x0tcv" path="res://Scripts/GridManager.gd" id="1_h6auv"]
-
-[node name="GridManager" type="Node2D"]
-script = ExtResource("1_h6auv")
