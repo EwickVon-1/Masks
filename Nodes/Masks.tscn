@@ -1,11 +1,19 @@
+<<<<<<< HEAD
 [gd_scene load_steps=9 format=4 uid="uid://c2vsuk8eqga4"]
+=======
+[gd_scene load_steps=8 format=4 uid="uid://c2vsuk8eqga4"]
+>>>>>>> refs/remotes/origin/main
 
 [ext_resource type="PackedScene" uid="uid://ddeqnyksgfxxk" path="res://Nodes/GridManager.tscn" id="1_c3vev"]
 [ext_resource type="Script" uid="uid://btbhq0gmhlc0l" path="res://Scripts/LevelRoot.gd" id="1_mu5sr"]
 [ext_resource type="Texture2D" uid="uid://run5wmjqjyvq" path="res://Assets/kenney_sports-pack/Tilesheet/groundGrass_mown.png" id="2_mu5sr"]
 [ext_resource type="PackedScene" uid="uid://baemephc655cr" path="res://Nodes/Player.tscn" id="3_lw7f6"]
+<<<<<<< HEAD
 [ext_resource type="PackedScene" uid="uid://h5cp564l8hk4" path="res://key.tscn" id="5_0mos2"]
 [ext_resource type="PackedScene" uid="uid://bpv8raibrswmv" path="res://simple_Scenes/node_2d.tscn" id="6_667tg"]
+=======
+[ext_resource type="PackedScene" uid="uid://da4wjqh02ykfc" path="res://Nodes/enemy_01.tscn" id="5_lw7f6"]
+>>>>>>> refs/remotes/origin/main
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_dkync"]
 texture = ExtResource("2_mu5sr")
@@ -858,6 +866,7 @@ tile_set = SubResource("TileSet_sahq2")
 
 [node name="Player" parent="." instance=ExtResource("3_lw7f6")]
 
+<<<<<<< HEAD
 [node name="key" parent="." instance=ExtResource("5_0mos2")]
 position = Vector2(240, -136)
 collision_layer = 2
@@ -865,3 +874,7 @@ collision_mask = 2
 
 [node name="Chest" parent="." instance=ExtResource("6_667tg")]
 position = Vector2(864, -144)
+=======
+[node name="Enemy-01" parent="." instance=ExtResource("5_lw7f6")]
+position = Vector2(533, -301)
+>>>>>>> refs/remotes/origin/main
