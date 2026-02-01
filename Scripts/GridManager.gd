@@ -1,6 +1,4 @@
 extends Node2D 
-@export var WIDTH := 100
-@export var HEIGHT := 100
 @export var TILE_SIZE := 32 
 
 var occupancy: Dictionary = {}
@@ -39,9 +37,9 @@ func empty_cell(cell: Vector2i):
 	occupancy[cell] = false 
 
 func move(agent_cell : Vector2i, target: Vector2i) -> bool: 
-	if can_move(target): 
+	if not can_move(target): 
 		return false 
-		
+	
 	empty_cell(agent_cell) 
 	place_agent(target) 
 	return true

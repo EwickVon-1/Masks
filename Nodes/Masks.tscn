@@ -859,3 +859,5 @@ tile_set = SubResource("TileSet_sahq2")
 
 [node name="Enemy-01" parent="." instance=ExtResource("5_lw7f6")]
 position = Vector2(533, -301)
+tile_size = 32
+move_time = 0.04

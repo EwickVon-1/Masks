@@ -17,8 +17,8 @@ var choices
 signal turn_finished
 
 func _ready() -> void: 
-	CurrPos.x = 5
-	CurrPos.y = 5
+	CurrPos.x = 3
+	CurrPos.y = 3
 	grid_manager.place_agent(CurrPos)
 	
 func take_turn() -> void:
@@ -65,7 +65,6 @@ func try_move(dir: Vector2i) -> bool:
 		return false
 		
 		
-
 func move_to(target_pos: Vector2):
 	var tween = create_tween()
 	tween.tween_property(self, "position", target_pos, move_time)\
@@ -75,4 +74,4 @@ func move_to(target_pos: Vector2):
 
 func end_turn() -> void:
 	is_enemy_turn = false
-	emit_signal("turn_finished")
+	call_deferred("emit_signal", "turn_finished")

@@ -12,7 +12,7 @@ signal turn_finished
 var action_committed := false
 
 
-func _ready() -> void: 
+func _ready() -> void:
 	grid_manager.place_agent(CurrPos)
 	
 func _process(_delta : float):
@@ -36,8 +36,9 @@ func _process(_delta : float):
 
 func try_move(dir: Vector2i):
 	var target_pos = CurrPos + dir
+	print(target_pos)
 	
-	if  grid_manager.move(CurrPos, target_pos):
+	if 	grid_manager.move(CurrPos, target_pos):
 		move_to(grid_manager.grid_to_world(target_pos))
 		CurrPos = target_pos
 	else:
@@ -53,6 +54,7 @@ func move_to(target_pos: Vector2):
 func end_turn() -> void:
 	is_player_turn = false
 	action_committed = false
-	emit_signal("turn_finished")
+	call_deferred("emit_signal", "turn_finished")
+
 	
 	
