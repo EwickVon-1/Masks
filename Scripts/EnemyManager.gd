@@ -12,6 +12,8 @@ var CurrPos : Vector2i = Vector2i.ZERO
 var is_enemy_turn := false
 var choices
 
+var directionfacing = "left"
+
 
 @onready var grid_manager = get_node("../GridManager")
 signal turn_finished
@@ -35,7 +37,7 @@ func take_turn() -> void:
 				Vector2i(0, sign(delta_pos.y)),   # then Y
 				Vector2i(-sign(delta_pos.x), 0),  # backtrack X
 				Vector2i(0, -sign(delta_pos.y)),  # backtrack Y
-				Vector2i.ZERO                     # wait
+				Vector2i.ZERO               # wait
 			]
 		else:
 			choices = [
@@ -56,6 +58,11 @@ func take_turn() -> void:
 
 func try_move(dir: Vector2i) -> bool:
 	var target_pos = CurrPos + dir
+	
+	if target_pos.x - CurrPos.x > 0:
+		directionfacing = "right"
+	else:
+		directionfacing = "left"
 	
 	if grid_manager.move(CurrPos, target_pos):
 		move_to(grid_manager.grid_to_world(target_pos))

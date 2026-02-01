@@ -11,6 +11,8 @@ signal turn_finished
 
 var action_committed := false
 
+var directionfacing := "right"
+
 
 func _ready() -> void:
 	grid_manager.place_agent(CurrPos)
@@ -22,8 +24,10 @@ func _process(_delta : float):
 	var dir = Vector2i.ZERO
 	if Input.is_action_just_pressed("ui_right"): 
 		dir = Vector2i.RIGHT 
+		directionfacing = "right"
 	elif Input.is_action_just_pressed("ui_left"): 
 		dir = Vector2i.LEFT 
+		directionfacing = "left"
 	elif Input.is_action_just_pressed("ui_down"): 
 		dir = Vector2i.DOWN 
 	elif Input.is_action_just_pressed("ui_up"): 

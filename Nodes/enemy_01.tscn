@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://da4wjqh02ykfc"]
+[gd_scene format=3 uid="uid://da4wjqh02ykfc"]
 
 [ext_resource type="Script" uid="uid://ch8vy508lxrlv" path="res://Scripts/EnemyManager.gd" id="1_idf2r"]
 [ext_resource type="Texture2D" uid="uid://gxm8supb7vph" path="res://icon.svg" id="2_t7m7e"]
@@ -9,23 +9,24 @@ radius = 13.0
 [sub_resource type="CircleShape2D" id="CircleShape2D_r81cn"]
 radius = 104.0
 
-[node name="Enemy-01" type="CharacterBody2D"]
+[node name="Enemy-01" type="CharacterBody2D" unique_id=1504027263]
 script = ExtResource("1_idf2r")
 tile_size = null
 move_time = null
 
-[node name="AnimatedSprite2D" type="Sprite2D" parent="."]
+[node name="AnimatedSprite2D" type="Sprite2D" parent="." unique_id=497718537]
+visible = false
 scale = Vector2(0.25, 0.25)
 texture = ExtResource("2_t7m7e")
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=252546104]
 shape = SubResource("CircleShape2D_ayrpq")
 
-[node name="Area2D" type="Area2D" parent="."]
+[node name="Area2D" type="Area2D" parent="." unique_id=892192438]
 collision_layer = 3
 collision_mask = 3
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" unique_id=1365326782]
 shape = SubResource("CircleShape2D_r81cn")
 
 [connection signal="body_shape_entered" from="Area2D" to="." method="_on_area_2d_body_shape_entered"]
